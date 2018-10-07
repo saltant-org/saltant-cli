@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Runs yaft."""
+"""Runs the saltant CLI."""
 
 from saltant_cli.main import main
 
