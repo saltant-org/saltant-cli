@@ -59,12 +59,6 @@ def setup_config(ctx, param, value):
     ctx.exit()
 
 
-def print_version(ctx, param, value):
-    """Show the version and exit."""
-    click.echo("%s version %s" % (NAME, VERSION))
-    ctx.exit()
-
-
 @click.group()
 @click.option(
     '--config-path',
@@ -78,13 +72,7 @@ def print_version(ctx, param, value):
     callback=setup_config,
     expose_value=False,
     is_eager=True,)
-@click.option(
-    '--version',
-    help="Show the version and exit.",
-    is_flag=True,
-    callback=print_version,
-    expose_value=False,
-    is_eager=True,)
+@click.version_option(version=VERSION, prog_name=NAME)
 @click.pass_context
 def main(ctx, config_path):
     """saltant CLI"""
