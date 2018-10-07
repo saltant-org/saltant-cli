@@ -3,21 +3,64 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import errno
+import os
 import click
 from saltant.client import Client
+import yaml
 from .config import parse_config_file
+from .constants import (
+    CONFIG_FILE_NAME,
+    PROJECT_CONFIG_HOME,
+)
 from .exceptions import ConfigFileNotFound
 from .version import NAME, VERSION
 
 
+def setup_config(ctx, param, value):
+    """Set up file config and exit."""
+    # Construct the path to the config file
+    config_file_path = os.path.join(PROJECT_CONFIG_HOME, CONFIG_FILE_NAME)
+
+    # Let the user know about the file we're writing to
+    if os.path.exists(config_file_path):
+        # Ask for confirmation to overwrite the file
+        if not click.confirm("%s already exists! Overwrite it?"
+                                % config_file_path):
+            # No overwritting. Get out.
+            ctx.exit()
+
+    # Get the parameters we need
+    config_dict = {}
+
+    config_dict['saltant-api-url'] = click.prompt(
+        "Enter the URL of the saltant server's API")
+    config_dict['saltant-auth-token'] = click.prompt(
+        "Enter an auth token for the saltant server")
+
+    # Make necessary subdirectories. TODO: use simpler methods if/when
+    # Python 2.x support is dropped. See
+    # https://stackoverflow.com/questions/600268/mkdir-p-functionality-in-python.
+    try:
+        os.makedirs(PROJECT_CONFIG_HOME)
+    except OSError as e:
+        if e.errno == errno.EEXIST and os.path.isdir(PROJECT_CONFIG_HOME):
+            pass
+        else:
+            raise
+
+    # Write to the file
+    with open(config_file_path, 'w') as config_file:
+        yaml.dump(config_dict, config_file, default_flow_style=False)
+
+    click.echo("Config settings saved to %s" % config_file_path)
+
+    # Exit
+    ctx.exit()
+
+
 def print_version(ctx, param, value):
     """Show the version and exit."""
-    # Not sure exactly what this is for, but it was in the Click docs
-    # examples so I guess it's best practice??
-    if not value or ctx.resilient_parsing:
-        return
-
-    # Print version and exit
     click.echo("%s version %s" % (NAME, VERSION))
     ctx.exit()
 
@@ -28,6 +71,13 @@ def print_version(ctx, param, value):
     help="Explicit path to config file.",
     default=None,
     type=click.Path(),)
+@click.option(
+    '--setup',
+    help="Set up config file and exit.",
+    is_flag=True,
+    callback=setup_config,
+    expose_value=False,
+    is_eager=True,)
 @click.option(
     '--version',
     help="Show the version and exit.",
