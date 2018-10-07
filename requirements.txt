@@ -3,6 +3,7 @@ chardet==3.0.4
 Click==7.0
 idna==2.7
 python-dateutil==2.7.3
+PyYAML==3.13
 requests==2.19.1
 saltant-py==0.1.0
 six==1.11.0

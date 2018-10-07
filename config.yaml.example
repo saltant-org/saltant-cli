@@ -1,0 +1,15 @@
+# saltant-cli config file
+
+# This config file is looked for at
+#
+# - repository_base/config.yaml (if running from source)
+# - $XDG_CONFIG_HOME/saltant-cli/config.yaml
+#
+# Note that if $XDG_CONFIG_HOME is not defined then $HOME/.config/ is
+# used instead.
+
+# The URL of the saltant API. For example, https://shahlabjobs.ca/api/.
+saltant-api-url: "https:/shahlabjobs.ca/api/"
+
+# The registered saltant user's authentication token.
+saltant-auth-token: "p0gch4mp101fy451do9uod1s1x9i4a"

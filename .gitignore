@@ -120,3 +120,6 @@ venv.bak/
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
+
+# Config file
+config.yaml
