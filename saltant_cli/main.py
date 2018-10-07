@@ -1,9 +1,10 @@
-"""Contains the main function."""
+"""Contains the main group of commands."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 import click
+from saltant.client import Client
 from .config import parse_config_file
 from .exceptions import ConfigFileNotFound
 from .version import NAME, VERSION
@@ -46,7 +47,12 @@ def main(ctx, config_path):
         ctx.exit()
 
     # Create a saltant session
-    # ctx.ensure_object(dict)
+    ctx.ensure_object(dict)
+    ctx.obj['client'] = Client(
+        base_api_url=config_dict['saltant-api-url'],
+        auth_token=config_dict['saltant-auth-token'],
+        test_if_authenticated=False,
+    )
 
 
 @main.command()
