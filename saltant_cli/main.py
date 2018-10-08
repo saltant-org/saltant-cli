@@ -6,6 +6,7 @@ from __future__ import print_function
 import errno
 import os
 import click
+import click_completion
 from saltant.client import Client
 import yaml
 from .config import parse_config_file
@@ -14,6 +15,7 @@ from .constants import (
     PROJECT_CONFIG_HOME,
 )
 from .exceptions import ConfigFileNotFound
+from .subcommands.completion import completion
 from .subcommands.task_instances import (
     container_task_instances,
     executable_task_instances,
@@ -104,7 +106,11 @@ def main(ctx, config_path):
 
 
 # Add in subcommands
+main.add_command(completion)
 main.add_command(container_task_instances)
 main.add_command(executable_task_instances)
 main.add_command(task_queues)
 main.add_command(users)
+
+# Enable click_completion monkey patch
+click_completion.init()
