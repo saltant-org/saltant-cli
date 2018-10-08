@@ -14,6 +14,7 @@ from .constants import (
     PROJECT_CONFIG_HOME,
 )
 from .exceptions import ConfigFileNotFound
+from .subcommands.task_queues import task_queues
 from .subcommands.users import users
 from .version import NAME, VERSION
 
@@ -99,4 +100,5 @@ def main(ctx, config_path):
 
 
 # Add in subcommands
+main.add_command(task_queues)
 main.add_command(users)
