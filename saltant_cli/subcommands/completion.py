@@ -10,14 +10,13 @@ from __future__ import print_function
 import click
 import click_completion
 
-CMD_HELP = """Shell completion for click-completion-command
-Available shell types:
-\b
-  %s
-Default type: auto
-""" % "\n  ".join('{:<12} {}'.format(
-    k, click_completion.core.shells[k]) for k in sorted(
-        click_completion.core.shells.keys()))
+CMD_HELP = (
+    "Shell completion for click-completion-command. "
+    + "Available shell types: "
+    + ", ".join(k for k in sorted(click_completion.core.shells.keys()))
+    + ". "
+    + "Defaults to current shell type."
+)
 
 
 @click.group(help=CMD_HELP)
