@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import print_function
 import click
 from .resource import (
+    generic_create_command,
     generic_get_command,
     generic_list_command,
 )
@@ -55,4 +56,40 @@ def list_task_queues(ctx, filters, filters_file):
         ctx,
         filters,
         filters_file,
+    )
+
+
+@task_queues.command(name='create')
+@click.option(
+    '--name',
+    help="The name of the task queue.",
+    required=True,
+)
+@click.option(
+    '--description',
+    help="A description of the task queue.",
+    default="",
+)
+@click.option(
+    '--private',
+    help="Whether the task queue is exclusive to the creator.",
+    default=False,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
+    '--active',
+    help="Whether the task queue is active.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.pass_context
+def create_task_queue(ctx, **kwargs):
+    """Create a task queue."""
+    generic_create_command(
+        'task_queues',
+        TASK_QUEUE_ATTRS,
+        ctx,
+        **kwargs,
     )

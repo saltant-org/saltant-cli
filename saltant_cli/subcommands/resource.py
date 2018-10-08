@@ -44,6 +44,33 @@ def generic_get_command(manager_name, attrs, ctx, id):
     click.echo(output)
 
 
+def generic_create_command(manager_name, attrs, ctx, **kwargs):
+    """Performs a generic create command.
+
+    Args:
+        manager_name: A string containing the name of the
+            saltant.client.Client's manager to use. For example,
+            "task_queues".
+        attrs: An iterable containing the attributes of the object to
+            use when displaying it.
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        **kwargs: A dictionary of arbitrary keyword arguments which
+            should match attributes used to create the object.
+    """
+    # Get the client from the context
+    client = ctx.obj['client']
+
+    # Create the object
+    manager = getattr(client, manager_name)
+    object = manager.create(**kwargs)
+
+    # Output a list display of the object created
+    output = generate_list_display(object, attrs)
+
+    click.echo(output)
+
+
 def generic_list_command(
         manager_name,
         attrs,

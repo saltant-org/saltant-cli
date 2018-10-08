@@ -20,8 +20,7 @@ def list_options(func):
     filters_option = click.option(
         '--filters',
         help="Filter keys and values encoded in JSON.",
-        default=None,
-        type=click.STRING,)
+        default=None,)
     filters_file_option = click.option(
         '--filters-file',
         help="Filter keys and values encoded in a JSON file.",

@@ -27,8 +27,7 @@ def users():
 @users.command(name='get')
 @click.argument(
     'username',
-    nargs=1,
-    type=click.STRING,)
+    nargs=1,)
 @click.pass_context
 def get_user(ctx, username):
     """Get user based on username."""

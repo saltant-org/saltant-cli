@@ -6,9 +6,11 @@ Currently this supports container and executable task instances.
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import json
 import click
 from .resource import (
     generic_clone_command,
+    generic_create_command,
     generic_get_command,
     generic_list_command,
     generic_terminate_command,
@@ -77,6 +79,45 @@ def list_container_task_instances(ctx, filters, filters_file):
         ctx,
         filters,
         filters_file,
+    )
+
+
+@container_task_instances.command(name='create')
+@click.option(
+    '--name',
+    help="A name for the task instance.",
+    default="",
+)
+@click.option(
+    '--task-type-id',
+    help="The ID of the task type.",
+    required=True,
+    type=click.INT,
+)
+@click.option(
+    '--task-queue-id',
+    help="The ID of the task queue.",
+    required=True,
+    type=click.INT,
+)
+@click.option(
+    '--json-arguments',
+    help="Arguments to give the instance in a JSON string.",
+    default="{}",
+    show_default=True,
+)
+@click.pass_context
+def create_container_task_instance(ctx, **kwargs):
+    """Create a container task instance."""
+    # Parse the JSON arguments
+    kwargs['arguments'] = json.loads(kwargs.pop('json_arguments'))
+
+    # Run the generic create command
+    generic_create_command(
+        'container_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        **kwargs,
     )
 
 
@@ -167,6 +208,45 @@ def list_executable_task_instances(ctx, filters, filters_file):
         ctx,
         filters,
         filters_file,
+    )
+
+
+@executable_task_instances.command(name='create')
+@click.option(
+    '--name',
+    help="A name for the task instance.",
+    default="",
+)
+@click.option(
+    '--task-type-id',
+    help="The ID of the task type.",
+    required=True,
+    type=click.INT,
+)
+@click.option(
+    '--task-queue-id',
+    help="The ID of the task queue.",
+    required=True,
+    type=click.INT,
+)
+@click.option(
+    '--json-arguments',
+    help="Arguments to give the instance in a JSON string.",
+    default="{}",
+    show_default=True,
+)
+@click.pass_context
+def create_executable_task_instance(ctx, **kwargs):
+    """Create a executable task instance."""
+    # Parse the JSON arguments
+    kwargs['arguments'] = json.loads(kwargs.pop('json_arguments'))
+
+    # Run the generic create command
+    generic_create_command(
+        'executable_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        **kwargs,
     )
 
 
