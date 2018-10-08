@@ -25,9 +25,17 @@ def completion():
 
 
 @completion.command()
-@click.option('--append/--overwrite', help="Append the completion code to the file", default=None)
-@click.argument('shell', required=False, type=click_completion.DocumentedChoice(click_completion.core.shells))
-@click.argument('path', required=False)
+@click.option(
+    '--append/--overwrite',
+    help="Append the completion code to the file",
+    default=None,)
+@click.argument(
+    'shell',
+    required=False,
+    type=click_completion.DocumentedChoice(click_completion.core.shells),)
+@click.argument(
+    'path',
+    required=False,)
 def install(append, shell, path):
     """Install the click-completion-command completion."""
     # Install
