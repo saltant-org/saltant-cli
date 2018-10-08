@@ -3,10 +3,13 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-import json
 import click
 from saltant.exceptions import BadHttpRequestError
 from tabulate import tabulate
+from .utils import (
+    combine_filter_json,
+    list_options,
+)
 
 
 @click.group()
@@ -43,16 +46,7 @@ def get_user(ctx, username):
 
 
 @users.command(name='list')
-@click.option(
-    '--filters',
-    help="Filter keys and values encoded in JSON.",
-    default=None,
-    type=click.STRING,)
-@click.option(
-    '--filters-file',
-    help="Filter keys and values encoded in a JSON file.",
-    default=None,
-    type=click.Path(),)
+@list_options
 @click.pass_context
 def list_users(ctx, filters, filters_file):
     """List users matching filter parameters."""
@@ -60,17 +54,10 @@ def list_users(ctx, filters, filters_file):
     client = ctx.obj['client']
 
     # Build up JSON filters to use
-    if filters is not None:
-        filters = json.loads(filters)
-    else:
-        filters = {}
-
-    if filters_file is not None:
-        with open(filters_file) as f:
-            filters.update(json.load(f))
+    combined_filters = combine_filter_json(filters, filters_file)
 
     # Query for users
-    user_list = client.users.list(filters)
+    user_list = client.users.list(combined_filters)
 
     # Output a pretty table
     output = tabulate(
