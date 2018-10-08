@@ -77,7 +77,7 @@ def setup_config(ctx, param, value):
 
 @click.group()
 @click.option(
-    '--config-path',
+    '-c', '--config-path',
     help="Explicit path to config file.",
     default=None,
     type=click.Path(),)
