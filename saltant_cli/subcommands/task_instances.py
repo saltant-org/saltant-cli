@@ -12,6 +12,7 @@ from .resource import (
     generic_get_command,
     generic_list_command,
     generic_terminate_command,
+    generic_wait_command,
 )
 from .utils import(
     list_options,
@@ -111,6 +112,28 @@ def terminate_container_task_instance(ctx, uuid):
     )
 
 
+@container_task_instances.command(name='wait')
+@click.option(
+    '--refresh-period',
+    help="Number of seconds to wait in between status checks.",
+    default=5,
+    type=click.FLOAT,)
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def wait_for_container_task_instance(ctx, uuid, refresh_period):
+    """Wait for an container task instance with given UUID to finish."""
+    generic_wait_command(
+        'container_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
+        refresh_period,
+    )
+
+
 @click.group()
 def executable_task_instances():
     """Command group to interface with executable task instances."""
@@ -176,4 +199,26 @@ def terminate_executable_task_instance(ctx, uuid):
         TASK_INSTANCE_GET_ATTRS,
         ctx,
         str(uuid),
+    )
+
+
+@executable_task_instances.command(name='wait')
+@click.option(
+    '--refresh-period',
+    help="Number of seconds to wait in between status checks.",
+    default=5,
+    type=click.FLOAT,)
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def wait_for_executable_task_instance(ctx, uuid, refresh_period):
+    """Wait for an executable task instance with given UUID to finish."""
+    generic_wait_command(
+        'executable_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
+        refresh_period,
     )

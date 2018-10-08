@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 import click
+import click_spinner
 from saltant.exceptions import BadHttpRequestError
 from .utils import (
     combine_filter_json,
@@ -131,6 +132,47 @@ def generic_terminate_command(manager_name, attrs, ctx, uuid):
     try:
         manager = getattr(client, manager_name)
         object = manager.terminate(uuid)
+
+        # Output a list display of the task instance
+        output = generate_list_display(object, attrs)
+    except BadHttpRequestError:
+        # Bad request
+        output = "task instance %s not found" % uuid
+
+    click.echo(output)
+
+
+def generic_wait_command(
+        manager_name,
+        attrs,
+        ctx,
+        uuid,
+        refresh_period,):
+    """Performs a generic wait command for task instances.
+
+    Args:
+        manager_name: A string containing the name of the
+            saltant.client.Client's manager to use. For example,
+            "executable_task_instances".
+        attrs: An iterable containing the attributes of the object to
+            use when displaying it.
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        uuid: A string containing the uuid of the task instance to
+            wait for.
+        refresh_period: A float specifying how many seconds to wait in
+            between checking the task's status.
+    """
+    # Get the client from the context
+    client = ctx.obj['client']
+
+    # Terminate the task instance
+    try:
+        manager = getattr(client, manager_name)
+
+        # Wait for the task instance to finish
+        with click_spinner.spinner():
+            object = manager.wait_until_finished(uuid, refresh_period)
 
         # Output a list display of the task instance
         output = generate_list_display(object, attrs)
