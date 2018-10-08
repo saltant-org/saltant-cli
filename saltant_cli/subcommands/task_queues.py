@@ -5,10 +5,19 @@ from __future__ import division
 from __future__ import print_function
 import click
 from saltant.exceptions import BadHttpRequestError
-from tabulate import tabulate
 from .utils import (
     combine_filter_json,
     list_options,
+    generate_table,
+)
+
+TASK_QUEUE_ATTRS = (
+    'id',
+    'user',
+    'name',
+    'private',
+    'active',
+    'description',
 )
 
 
@@ -36,20 +45,7 @@ def get_task_queue(ctx, id):
         task_queue = client.task_queues.get(id)
 
         # Output a pretty table
-        output = tabulate(
-            [[task_queue.id,
-              task_queue.user,
-              task_queue.name,
-              task_queue.private,
-              task_queue.active,
-              task_queue.description,]],
-            headers=['id',
-                     'user',
-                     'name',
-                     'private',
-                     'active',
-                     'description',],
-        )
+        output = generate_table(task_queue, TASK_QUEUE_ATTRS)
     except BadHttpRequestError:
         # Bad request
         output = "task queue not found"
@@ -72,19 +68,6 @@ def list_task_queues(ctx, filters, filters_file):
     task_queue_list = client.task_queues.list(combined_filters)
 
     # Output a pretty table
-    output = tabulate(
-        [[task_queue.id,
-          task_queue.user,
-          task_queue.name,
-          task_queue.private,
-          task_queue.active,
-          task_queue.description,] for task_queue in task_queue_list],
-        headers=['id',
-                 'user',
-                 'name',
-                 'private',
-                 'active',
-                 'description',],
-    )
+    output = generate_table(task_queue_list, TASK_QUEUE_ATTRS)
 
     click.echo_via_pager(output)

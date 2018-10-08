@@ -5,10 +5,15 @@ from __future__ import division
 from __future__ import print_function
 import click
 from saltant.exceptions import BadHttpRequestError
-from tabulate import tabulate
 from .utils import (
     combine_filter_json,
     list_options,
+    generate_table,
+)
+
+USER_ATTRS = (
+    'username',
+    'email',
 )
 
 
@@ -35,10 +40,7 @@ def get_user(ctx, username):
         user = client.users.get(username)
 
         # Output a pretty table
-        output = tabulate(
-            [[user.username, user.email]],
-            headers=['username', 'email'],
-        )
+        output = generate_table(user, USER_ATTRS)
     except BadHttpRequestError:
         output = "%s not found" % username
 
@@ -60,9 +62,6 @@ def list_users(ctx, filters, filters_file):
     user_list = client.users.list(combined_filters)
 
     # Output a pretty table
-    output = tabulate(
-        [[user.username, user.email] for user in user_list],
-        headers=['username', 'email'],
-    )
+    output = generate_table(user_list, USER_ATTRS)
 
     click.echo_via_pager(output)

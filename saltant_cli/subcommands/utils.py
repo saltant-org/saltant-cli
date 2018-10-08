@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import print_function
 import json
 import click
+from tabulate import tabulate
 
 
 def list_options(func):
@@ -35,3 +36,14 @@ def combine_filter_json(filters, filters_file):
             combined_filters.update(json.load(f))
 
     return filters
+
+
+def generate_table(objects, attrs):
+    """Generate a table based for object(s) based on some attributes."""
+    # If only single item passed in, wrap it in a list
+    if not isinstance(objects, list):
+        objects = [objects]
+
+    return tabulate(
+        [[getattr(object, attr) for attr in attrs] for object in objects],
+        headers=attrs,)
