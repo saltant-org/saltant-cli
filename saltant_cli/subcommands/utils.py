@@ -35,7 +35,7 @@ def combine_filter_json(filters, filters_file):
         with open(filters_file) as f:
             combined_filters.update(json.load(f))
 
-    return filters
+    return combined_filters
 
 
 def generate_table(objects, attrs):
