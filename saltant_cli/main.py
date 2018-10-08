@@ -31,7 +31,7 @@ def setup_config(ctx, param, value):
     if os.path.exists(config_file_path):
         # Ask for confirmation to overwrite the file
         if not click.confirm("%s already exists! Overwrite it?"
-                                % config_file_path):
+                             % config_file_path):
             # No overwritting. Get out.
             ctx.exit()
 

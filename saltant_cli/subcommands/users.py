@@ -27,7 +27,7 @@ def users(ctx):
     default=None,
     type=click.Path(),)
 @click.pass_context
-def list(ctx, filters, filters_file):
+def list(ctx, filters, filters_file):   # pylint: disable=redefined-builtin
     """List users matching filter parameters."""
     # Get the client from the context
     client = ctx.obj['client']
