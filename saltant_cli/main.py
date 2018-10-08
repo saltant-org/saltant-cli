@@ -21,6 +21,10 @@ from .subcommands.task_instances import (
     executable_task_instances,
 )
 from .subcommands.task_queues import task_queues
+from .subcommands.task_types import (
+    container_task_types,
+    executable_task_types,
+)
 from .subcommands.users import users
 from .version import NAME, VERSION
 
@@ -108,7 +112,9 @@ def main(ctx, config_path):
 # Add in subcommands
 main.add_command(completion)
 main.add_command(container_task_instances)
+main.add_command(container_task_types)
 main.add_command(executable_task_instances)
+main.add_command(executable_task_types)
 main.add_command(task_queues)
 main.add_command(users)
 
