@@ -14,6 +14,7 @@ from .constants import (
     PROJECT_CONFIG_HOME,
 )
 from .exceptions import ConfigFileNotFound
+from .subcommands.users import users
 from .version import NAME, VERSION
 
 
@@ -97,8 +98,5 @@ def main(ctx, config_path):
     )
 
 
-@main.command()
-@click.pass_context
-def subcommand(ctx):
-    # Put subcommands in their own modules later
-    click.echo("THIS IS A SUBCOMMAND")
+# Add in subcommands
+main.add_command(users)
