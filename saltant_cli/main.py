@@ -30,7 +30,15 @@ from .version import NAME, VERSION
 
 
 def setup_config(ctx, param, value):
-    """Set up file config and exit."""
+    """Set up file config and exit.
+
+    Args:
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        param: A click.core.Option object containing information about
+            the option that spawned this callback.
+        value: A Boolean containing the value of the above parameter.
+    """
     # Do nothing if this option wasn't specified
     if not value or ctx.resilient_parsing:
         return
@@ -75,7 +83,7 @@ def setup_config(ctx, param, value):
     ctx.exit()
 
 
-@click.group()
+@click.group(help="saltant CLI")
 @click.option(
     '-c', '--config-path',
     help="Explicit path to config file.",
@@ -91,7 +99,14 @@ def setup_config(ctx, param, value):
 @click.version_option(version=VERSION, prog_name=NAME)
 @click.pass_context
 def main(ctx, config_path):
-    """saltant CLI"""
+    """Main entry point for saltant CLI.
+
+    Args:
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        config_path: A string (or None) containing an explicit path to a
+            config file.
+    """
     # Load in the config file
     try:
         config_dict = parse_config_file(config_path)

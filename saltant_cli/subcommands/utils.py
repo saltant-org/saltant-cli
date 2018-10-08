@@ -9,7 +9,14 @@ from tabulate import tabulate
 
 
 def list_options(func):
-    """Adds in --filters and --filters-file options for a command."""
+    """Adds in --filters and --filters-file options for a command.
+
+    Args:
+        func: The function to be enclosed.
+
+    Returns:
+        The enclosed function.
+    """
     filters_option = click.option(
         '--filters',
         help="Filter keys and values encoded in JSON.",
@@ -25,7 +32,17 @@ def list_options(func):
 
 
 def combine_filter_json(filters, filters_file):
-    """Combines filter JSON sources for a list command."""
+    """Combines filter JSON sources for a list command.
+
+    Args:
+        filters: A JSON-encoded string containing filter information.
+        filters_file: A string containing a path to a JSON-encoded file
+            specifying filter information.
+
+    Returns:
+        A dictionary to be encoded into JSON containing the filters
+        combined from the above sources.
+    """
     combined_filters = {}
 
     if filters is not None:
@@ -39,8 +56,20 @@ def combine_filter_json(filters, filters_file):
 
 
 def generate_table(objects, attrs):
-    """Generate a table based for object(s) based on some attributes."""
+    """Generate a table for object(s) based on some attributes.
+
+    Args:
+        objects: An iterable of objects which have specific attributes.
+        attrs: An interable object of strings containing attributes to
+            get from the above objects.
+
+    Returns:
+        A string containing the tabulated objects with respect to the
+        passed in attributes.
+    """
     # If only single item passed in, wrap it in a list
+    # TODO: remove this when we stop using this function for get
+    # commands
     if not isinstance(objects, list):
         objects = [objects]
 

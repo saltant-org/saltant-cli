@@ -15,12 +15,13 @@ CMD_HELP = (
     + "Available shell types: "
     + ", ".join(k for k in sorted(click_completion.core.shells.keys()))
     + ". "
-    + "Defaults to current shell type."
+    + "Uses current shell type if not specified."
 )
 
 
 @click.group(help=CMD_HELP)
 def completion():
+    """Command group to generate shell command completions."""
     pass
 
 
