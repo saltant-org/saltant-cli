@@ -16,13 +16,13 @@ def users(ctx):
     pass
 
 
-@users.command()
+@users.command(name='get')
 @click.argument(
     'username',
     nargs=1,
     type=click.STRING,)
 @click.pass_context
-def get(ctx, username):
+def get_user(ctx, username):
     """Get user based on username."""
     # Get the client from the context
     client = ctx.obj['client']
@@ -42,7 +42,7 @@ def get(ctx, username):
     click.echo_via_pager(output)
 
 
-@users.command()
+@users.command(name='list')
 @click.option(
     '--filters',
     help="Filter keys and values encoded in JSON.",
@@ -54,7 +54,7 @@ def get(ctx, username):
     default=None,
     type=click.Path(),)
 @click.pass_context
-def list(ctx, filters, filters_file):   # pylint: disable=redefined-builtin
+def list_users(ctx, filters, filters_file):
     """List users matching filter parameters."""
     # Get the client from the context
     client = ctx.obj['client']
