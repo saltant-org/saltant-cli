@@ -37,6 +37,7 @@ setup(
     install_requires=[
         'Click',
         'click-completion',
+        'click-spinner',
         'PyYAML',
         'saltant-py',
         'tabulate',
