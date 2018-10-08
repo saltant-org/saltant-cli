@@ -7,4 +7,5 @@ PyYAML==3.13
 requests==2.19.1
 saltant-py==0.1.0
 six==1.11.0
+tabulate==0.8.2
 urllib3==1.23
