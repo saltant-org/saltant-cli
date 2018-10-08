@@ -96,10 +96,41 @@ def generic_clone_command(manager_name, attrs, ctx, uuid):
     # Get the client from the context
     client = ctx.obj['client']
 
-    # Clone for the task instance
+    # Clone the task instance
     try:
         manager = getattr(client, manager_name)
         object = manager.clone(uuid)
+
+        # Output a list display of the task instance
+        output = generate_list_display(object, attrs)
+    except BadHttpRequestError:
+        # Bad request
+        output = "task instance %s not found" % uuid
+
+    click.echo(output)
+
+
+def generic_terminate_command(manager_name, attrs, ctx, uuid):
+    """Performs a generic terminate command for task instances.
+
+    Args:
+        manager_name: A string containing the name of the
+            saltant.client.Client's manager to use. For example,
+            "executable_task_instances".
+        attrs: An iterable containing the attributes of the object to
+            use when displaying it.
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        uuid: A string containing the uuid of the task instance to
+            terminate.
+    """
+    # Get the client from the context
+    client = ctx.obj['client']
+
+    # Terminate the task instance
+    try:
+        manager = getattr(client, manager_name)
+        object = manager.terminate(uuid)
 
         # Output a list display of the task instance
         output = generate_list_display(object, attrs)

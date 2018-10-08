@@ -11,6 +11,7 @@ from .resource import (
     generic_clone_command,
     generic_get_command,
     generic_list_command,
+    generic_terminate_command,
 )
 from .utils import(
     list_options,
@@ -55,7 +56,7 @@ def container_task_instances():
     type=click.UUID,)
 @click.pass_context
 def get_container_task_instance(ctx, uuid):
-    """Get container task instance based on UUID."""
+    """Get a container task instance based on UUID."""
     generic_get_command(
         'container_task_instances',
         TASK_INSTANCE_GET_ATTRS,
@@ -94,6 +95,22 @@ def clone_container_task_instance(ctx, uuid):
     )
 
 
+@container_task_instances.command(name='terminate')
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def terminate_container_task_instance(ctx, uuid):
+    """Terminate a container task instance with given UUID."""
+    generic_terminate_command(
+        'container_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
+    )
+
+
 @click.group()
 def executable_task_instances():
     """Command group to interface with executable task instances."""
@@ -107,7 +124,7 @@ def executable_task_instances():
     type=click.UUID,)
 @click.pass_context
 def get_executable_task_instance(ctx, uuid):
-    """Get executable task instance based on UUID."""
+    """Get an executable task instance based on UUID."""
     generic_get_command(
         'executable_task_instances',
         TASK_INSTANCE_GET_ATTRS,
@@ -137,8 +154,24 @@ def list_executable_task_instances(ctx, filters, filters_file):
     type=click.UUID,)
 @click.pass_context
 def clone_executable_task_instance(ctx, uuid):
-    """Clone a executable task instance with given UUID."""
+    """Clone an executable task instance with given UUID."""
     generic_clone_command(
+        'executable_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
+    )
+
+
+@executable_task_instances.command(name='terminate')
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def terminate_executable_task_instance(ctx, uuid):
+    """Terminate an executable task instance with given UUID."""
+    generic_terminate_command(
         'executable_task_instances',
         TASK_INSTANCE_GET_ATTRS,
         ctx,
