@@ -67,12 +67,23 @@ def generate_table(objects, attrs):
         A string containing the tabulated objects with respect to the
         passed in attributes.
     """
-    # If only single item passed in, wrap it in a list
-    # TODO: remove this when we stop using this function for get
-    # commands
-    if not isinstance(objects, list):
-        objects = [objects]
-
     return tabulate(
         [[getattr(object, attr) for attr in attrs] for object in objects],
         headers=attrs,)
+
+
+def generate_list_display(object, attrs):
+    """Generate a display string for an object based on some attributes.
+
+    Args:
+        object: An object which has specific attributes.
+        attrs: An interable of strings containing attributes to get from
+            the above object.
+
+    Returns:
+        A string containing a list display of the object with respect to
+        the passed in attributes.
+    """
+    return "\n".join(
+        click.style(attr, bold=True)
+        + ": %s" % getattr(object, attr) for attr in attrs)

@@ -18,7 +18,18 @@ from .utils import(
 # Have a hierarchy of these later if attributes for different types of
 # task instances start to diverge. For now all task instances have the
 # same attributes regardless of their type.
-TASK_INSTANCE_ATTRS = (
+TASK_INSTANCE_GET_ATTRS = (
+    'uuid',
+    'name',
+    'state',
+    'user',
+    'task_queue',
+    'task_type',
+    'datetime_created',
+    'datetime_finished',
+    'arguments',
+)
+TASK_INSTANCE_LIST_ATTRS = (
     'uuid',
     'state',
     'user',
@@ -26,7 +37,6 @@ TASK_INSTANCE_ATTRS = (
     'task_type',
     'datetime_created',
     'datetime_finished',
-    #'arguments',
     'name',
 )
 
@@ -47,7 +57,7 @@ def get_container_task_instance(ctx, uuid):
     """Get container task instance based on UUID."""
     generic_get_command(
         'container_task_instances',
-        TASK_INSTANCE_ATTRS,
+        TASK_INSTANCE_GET_ATTRS,
         ctx,
         str(uuid),
     )
@@ -60,7 +70,7 @@ def list_container_task_instances(ctx, filters, filters_file):
     """List container task instances matching filter parameters."""
     generic_list_command(
         'container_task_instances',
-        TASK_INSTANCE_ATTRS,
+        TASK_INSTANCE_LIST_ATTRS,
         ctx,
         filters,
         filters_file,
@@ -83,7 +93,7 @@ def get_executable_task_instance(ctx, uuid):
     """Get executable task instance based on UUID."""
     generic_get_command(
         'executable_task_instances',
-        TASK_INSTANCE_ATTRS,
+        TASK_INSTANCE_GET_ATTRS,
         ctx,
         str(uuid),
     )
@@ -96,7 +106,7 @@ def list_executable_task_instances(ctx, filters, filters_file):
     """List executable task instances matching filter parameters."""
     generic_list_command(
         'executable_task_instances',
-        TASK_INSTANCE_ATTRS,
+        TASK_INSTANCE_LIST_ATTRS,
         ctx,
         filters,
         filters_file,

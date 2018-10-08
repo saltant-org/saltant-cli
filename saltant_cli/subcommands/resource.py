@@ -8,6 +8,7 @@ from saltant.exceptions import BadHttpRequestError
 from .utils import (
     combine_filter_json,
     generate_table,
+    generate_list_display,
 )
 
 
@@ -34,12 +35,12 @@ def generic_get_command(manager_name, attrs, ctx, id):
         object = manager.get(id)
 
         # Output a pretty table
-        output = generate_table(object, attrs)
+        output = generate_list_display(object, attrs)
     except BadHttpRequestError:
         # Bad request
         output = "not found"
 
-    click.echo_via_pager(output)
+    click.echo(output)
 
 
 def generic_list_command(

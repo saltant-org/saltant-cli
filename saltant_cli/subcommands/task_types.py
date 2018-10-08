@@ -15,17 +15,37 @@ from .utils import(
     list_options,
 )
 
-BASE_TASK_TYPE_ATTRS = (
+BASE_TASK_TYPE_GET_ATTRS = (
+    'id',
+    'user',
+    'name',
+    'description',
+    'datetime_created',
+    'command_to_run',
+    'environment_variables',
+    'required_arguments',
+    'required_arguments_default_values',
+)
+CONTAINER_TASK_TYPE_GET_ATTRS = (
+    BASE_TASK_TYPE_GET_ATTRS
+    + ('logs_path',
+       'results_path',
+       'container_image',
+       'container_type',)
+)
+EXECUTABLE_TASK_TYPE_GET_ATTRS = BASE_TASK_TYPE_GET_ATTRS
+
+BASE_TASK_TYPE_LIST_ATTRS = (
     'id',
     'name',
     'user',
-    'command_to_run',
+    'description',
 )
-CONTAINER_TASK_TYPE_ATTRS = (
-    BASE_TASK_TYPE_ATTRS
+CONTAINER_TASK_TYPE_LIST_ATTRS = (
+    BASE_TASK_TYPE_LIST_ATTRS
     + ('container_image', 'container_type')
 )
-EXECUTABLE_TASK_TYPE_ATTRS = BASE_TASK_TYPE_ATTRS
+EXECUTABLE_TASK_TYPE_LIST_ATTRS = BASE_TASK_TYPE_LIST_ATTRS
 
 
 @click.group()
@@ -44,7 +64,7 @@ def get_container_task_type(ctx, id):
     """Get container task type with given ID."""
     generic_get_command(
         'container_task_types',
-        CONTAINER_TASK_TYPE_ATTRS,
+        CONTAINER_TASK_TYPE_GET_ATTRS,
         ctx,
         id,
     )
@@ -57,7 +77,7 @@ def list_container_task_types(ctx, filters, filters_file):
     """List container typesinstances matching filter parameters."""
     generic_list_command(
         'container_task_types',
-        CONTAINER_TASK_TYPE_ATTRS,
+        CONTAINER_TASK_TYPE_LIST_ATTRS,
         ctx,
         filters,
         filters_file,
@@ -80,7 +100,7 @@ def get_executable_task_type(ctx, id):
     """Get executable task type with given ID."""
     generic_get_command(
         'executable_task_types',
-        EXECUTABLE_TASK_TYPE_ATTRS,
+        EXECUTABLE_TASK_TYPE_GET_ATTRS,
         ctx,
         id,
     )
@@ -93,7 +113,7 @@ def list_executable_task_types(ctx, filters, filters_file):
     """List executable typesinstances matching filter parameters."""
     generic_list_command(
         'executable_task_types',
-        EXECUTABLE_TASK_TYPE_ATTRS,
+        EXECUTABLE_TASK_TYPE_LIST_ATTRS,
         ctx,
         filters,
         filters_file,
