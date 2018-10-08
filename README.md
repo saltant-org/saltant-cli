@@ -27,8 +27,8 @@ python setup.py install
 
 where `python` is in versions 2.7 or 3.5+.
 
-However you choose to install saltant-cli, make sure that the binary
-resulting from the above commands are somehwere on your `$PATH`. On some
+However you chose to install saltant-cli, make sure that the binary
+resulting from the above commands are somewhere on your `$PATH`. On some
 systems, this may involve running the above commands as root.
 
 ### Running from source
@@ -51,4 +51,4 @@ saltant-cli completion install <my-shell-type>
 ```
 
 where `my-shell-type` is either `bash`, `zsh`, `fish`, or `powershell`
-(or ``—blank—if you want to use the current shell type).
+(or blank if you want to use the current shell type).
