@@ -19,6 +19,10 @@ from .version import NAME, VERSION
 
 def setup_config(ctx, param, value):
     """Set up file config and exit."""
+    # Do nothing if this option wasn't specified
+    if not value or ctx.resilient_parsing:
+        return
+
     # Construct the path to the config file
     config_file_path = os.path.join(PROJECT_CONFIG_HOME, CONFIG_FILE_NAME)
 
