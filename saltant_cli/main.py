@@ -86,7 +86,7 @@ def main(ctx, config_path):
         config_dict = parse_config_file(config_path)
     except ConfigFileNotFound:
         # Error! Get out!
-        click.echo("USEFUL ERROR MESSAGE HERE")
+        click.echo("No config file found. Please run program with --setup.")
         ctx.exit()
 
     # Create a saltant session
