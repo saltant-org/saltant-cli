@@ -8,6 +8,7 @@ from __future__ import division
 from __future__ import print_function
 import click
 from .resource import (
+    generic_clone_command,
     generic_get_command,
     generic_list_command,
 )
@@ -77,6 +78,22 @@ def list_container_task_instances(ctx, filters, filters_file):
     )
 
 
+@container_task_instances.command(name='clone')
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def clone_container_task_instance(ctx, uuid):
+    """Clone a container task instance with given UUID."""
+    generic_clone_command(
+        'container_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
+    )
+
+
 @click.group()
 def executable_task_instances():
     """Command group to interface with executable task instances."""
@@ -110,4 +127,20 @@ def list_executable_task_instances(ctx, filters, filters_file):
         ctx,
         filters,
         filters_file,
+    )
+
+
+@executable_task_instances.command(name='clone')
+@click.argument(
+    'uuid',
+    nargs=1,
+    type=click.UUID,)
+@click.pass_context
+def clone_executable_task_instance(ctx, uuid):
+    """Clone a executable task instance with given UUID."""
+    generic_clone_command(
+        'executable_task_instances',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        str(uuid),
     )

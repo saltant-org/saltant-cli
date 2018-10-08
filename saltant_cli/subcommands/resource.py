@@ -34,7 +34,7 @@ def generic_get_command(manager_name, attrs, ctx, id):
         manager = getattr(client, manager_name)
         object = manager.get(id)
 
-        # Output a pretty table
+        # Output a list display of the object
         output = generate_list_display(object, attrs)
     except BadHttpRequestError:
         # Bad request
@@ -77,3 +77,34 @@ def generic_list_command(
     output = generate_table(object_list, attrs)
 
     click.echo_via_pager(output)
+
+
+def generic_clone_command(manager_name, attrs, ctx, uuid):
+    """Performs a generic clone command for task instances.
+
+    Args:
+        manager_name: A string containing the name of the
+            saltant.client.Client's manager to use. For example,
+            "executable_task_instances".
+        attrs: An iterable containing the attributes of the object to
+            use when displaying it.
+        ctx: A click.core.Context object containing information about
+            the Click session.
+        uuid: A string containing the uuid of the task instance to
+            clone.
+    """
+    # Get the client from the context
+    client = ctx.obj['client']
+
+    # Clone for the task instance
+    try:
+        manager = getattr(client, manager_name)
+        object = manager.clone(uuid)
+
+        # Output a list display of the task instance
+        output = generate_list_display(object, attrs)
+    except BadHttpRequestError:
+        # Bad request
+        output = "task instance %s not found" % uuid
+
+    click.echo(output)
