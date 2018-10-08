@@ -35,5 +35,6 @@ setup(
         'click',
         'PyYAML',
         'saltant-py',
+        'tabulate',
     ],
 )
