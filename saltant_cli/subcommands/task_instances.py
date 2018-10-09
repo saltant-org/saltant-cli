@@ -117,7 +117,7 @@ def create_container_task_instance(ctx, **kwargs):
         'container_task_instances',
         TASK_INSTANCE_GET_ATTRS,
         ctx,
-        **kwargs,
+        **kwargs
     )
 
 
@@ -246,7 +246,7 @@ def create_executable_task_instance(ctx, **kwargs):
         'executable_task_instances',
         TASK_INSTANCE_GET_ATTRS,
         ctx,
-        **kwargs,
+        **kwargs
     )
 
 

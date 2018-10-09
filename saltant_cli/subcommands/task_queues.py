@@ -91,5 +91,5 @@ def create_task_queue(ctx, **kwargs):
         'task_queues',
         TASK_QUEUE_ATTRS,
         ctx,
-        **kwargs,
+        **kwargs
     )
