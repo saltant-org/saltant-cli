@@ -89,13 +89,13 @@ def list_container_task_instances(ctx, filters, filters_file):
     default="",
 )
 @click.option(
-    '--task-type-id',
+    '--task-type',
     help="The ID of the task type.",
     required=True,
     type=click.INT,
 )
 @click.option(
-    '--task-queue-id',
+    '--task-queue',
     help="The ID of the task queue.",
     required=True,
     type=click.INT,
@@ -111,6 +111,10 @@ def create_container_task_instance(ctx, **kwargs):
     """Create a container task instance."""
     # Parse the JSON arguments
     kwargs['arguments'] = json.loads(kwargs.pop('json_arguments'))
+
+    # Rename arguments as necessary
+    kwargs['task_queue_id'] = kwargs.pop('task_queue')
+    kwargs['task_type_id'] = kwargs.pop('task_type')
 
     # Run the generic create command
     generic_create_command(
@@ -218,13 +222,13 @@ def list_executable_task_instances(ctx, filters, filters_file):
     default="",
 )
 @click.option(
-    '--task-type-id',
+    '--task-type',
     help="The ID of the task type.",
     required=True,
     type=click.INT,
 )
 @click.option(
-    '--task-queue-id',
+    '--task-queue',
     help="The ID of the task queue.",
     required=True,
     type=click.INT,
@@ -240,6 +244,10 @@ def create_executable_task_instance(ctx, **kwargs):
     """Create a executable task instance."""
     # Parse the JSON arguments
     kwargs['arguments'] = json.loads(kwargs.pop('json_arguments'))
+
+    # Rename arguments as necessary
+    kwargs['task_queue_id'] = kwargs.pop('task_queue')
+    kwargs['task_type_id'] = kwargs.pop('task_type')
 
     # Run the generic create command
     generic_create_command(
