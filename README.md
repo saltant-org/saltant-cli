@@ -88,6 +88,51 @@ saltant-cli completion install my-shell-type
 where `my-shell-type` is either `bash`, `zsh`, `fish`, or `powershell`
 (or blank if you want to use the current shell type).
 
+## Usage
+
+Here you're going to find `--help` your best friend. Run this at any
+stage of the command tree to learn more about what to do!
+
+### Commmand tree
+
+Here's a sketch of what you can do. Again, supply `--help` at any point
+to figure out how to use a given command.
+
+```
+saltant-cli
+├── completion
+│   └── install
+├── container-task-instances
+│   ├── clone
+│   ├── create
+│   ├── get
+│   ├── list
+│   ├── terminate
+│   └── wait
+├── container-task-types
+│   ├── create
+│   ├── get
+│   └── list
+├── executable-task-instances
+│   ├── clone
+│   ├── create
+│   ├── get
+│   ├── list
+│   ├── terminate
+│   └── wait
+├── executable-task-types
+│   ├── create
+│   ├── get
+│   └── list
+├── task-queues
+│   ├── create
+│   ├── get
+│   └── list
+└── users
+    ├── get
+    └── list
+```
+
 ## See also
 
 [saltant-py](https://github.com/mwiens91/saltant-py/), a saltant SDK for
