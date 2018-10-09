@@ -38,6 +38,7 @@ setup(
         'Click',
         'click-completion',
         'click-spinner',
+        'colorama',
         'PyYAML',
         'saltant-py',
         'tabulate',
