@@ -133,6 +133,46 @@ saltant-cli
     └── list
 ```
 
+### Examples
+
+Let's go through a few examples. First, let's list some container task
+types using some API filters:
+
+```
+saltant-cli container-task-types list --filters '{"user_username_in": ["matt", "daniel"]}'
+```
+
+Great! This will show us the container task types created by Matt and
+Daniel! Secondly, let's create a task queue:
+
+```
+saltant-cli task-queues create --name "amazing-task-queue" --description "Seriously best task queue ever."
+```
+
+If we got confused about how to use this command, all we need to do is
+drop in `--help`. Thirdly: let's do just that:
+
+```
+saltant-cli task-queues create --help
+```
+
+which will give us
+
+```
+$ saltant-cli task-queues create --help
+Usage: saltant-cli task-queues create [OPTIONS]
+
+  Create a task queue.
+
+Options:
+  --name TEXT         The name of the task queue.  [required]
+  --description TEXT  A description of the task queue.
+  --private BOOLEAN   Whether the task queue is exclusive to the creator.
+                      [default: False]
+  --active BOOLEAN    Whether the task queue is active.  [default: True]
+  --help              Show this message and exit.
+```
+
 ## See also
 
 [saltant-py](https://github.com/mwiens91/saltant-py/), a saltant SDK for
