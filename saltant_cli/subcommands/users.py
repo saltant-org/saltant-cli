@@ -20,7 +20,7 @@ USER_ATTRS = (
 
 @click.group()
 def users():
-    """Command group to interface with users."""
+    """Command group for users."""
     pass
 
 

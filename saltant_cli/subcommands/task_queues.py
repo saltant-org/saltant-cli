@@ -25,7 +25,7 @@ TASK_QUEUE_ATTRS = (
 
 @click.group()
 def task_queues():
-    """Command group to interface with task queues."""
+    """Command group for task queues."""
     pass
 
 

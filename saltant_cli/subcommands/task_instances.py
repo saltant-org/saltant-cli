@@ -48,7 +48,7 @@ TASK_INSTANCE_LIST_ATTRS = (
 
 @click.group()
 def container_task_instances():
-    """Command group to interface with container task instances."""
+    """Command group for container task instances."""
     pass
 
 
@@ -177,7 +177,7 @@ def wait_for_container_task_instance(ctx, uuid, refresh_period):
 
 @click.group()
 def executable_task_instances():
-    """Command group to interface with executable task instances."""
+    """Command group for executable task instances."""
     pass
 
 

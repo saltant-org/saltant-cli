@@ -51,7 +51,7 @@ EXECUTABLE_TASK_TYPE_LIST_ATTRS = BASE_TASK_TYPE_LIST_ATTRS
 
 @click.group()
 def container_task_types():
-    """Command group to interface with container task types."""
+    """Command group for container task types."""
     pass
 
 
@@ -157,7 +157,7 @@ def create_container_task_type(ctx, **kwargs):
 
 @click.group()
 def executable_task_types():
-    """Command group to interface with executable task types."""
+    """Command group for executable task types."""
     pass
 
 
