@@ -87,3 +87,8 @@ saltant-cli completion install my-shell-type
 
 where `my-shell-type` is either `bash`, `zsh`, `fish`, or `powershell`
 (or blank if you want to use the current shell type).
+
+## See also
+
+[saltant-py](https://github.com/mwiens91/saltant-py/), a saltant SDK for
+Python.
