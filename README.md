@@ -5,8 +5,6 @@
 
 # saltant CLI
 
-### Work in progress D:
-
 saltant-cli is a CLI for
 [saltant](https://github.com/saltant-org/saltant) written on top of
 [saltant-py](https://github.com/saltant-org/saltant-py).  It lets you
