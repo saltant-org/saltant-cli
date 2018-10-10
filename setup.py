@@ -13,7 +13,7 @@ setup(
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/mwiens91/saltant-cli',
+    url='https://github.com/saltant-org/saltant-cli',
     author='Matt Wiens',
     author_email='mwiens91@gmail.com',
     license='MIT',

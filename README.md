@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/mwiens91/saltant-cli.svg?branch=master)](https://travis-ci.com/mwiens91/saltant-cli)
-[![codecov](https://codecov.io/gh/mwiens91/saltant-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/mwiens91/saltant-cli)
+[![Build Status](https://travis-ci.com/saltant-org/saltant-cli.svg?branch=master)](https://travis-ci.com/saltant-org/saltant-cli)
+[![codecov](https://codecov.io/gh/saltant-org/saltant-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/saltant-org/saltant-cli)
 [![PyPI](https://img.shields.io/pypi/v/saltant-cli.svg)](https://pypi.org/project/saltant-cli/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/saltant-cli.svg)](https://pypi.org/project/saltant-cli/)
 
@@ -7,9 +7,10 @@
 
 ### Work in progress D:
 
-saltant-cli is a CLI for [saltant](https://github.com/mwiens91/saltant)
-written on top of [saltant-py](https://github.com/mwiens91/saltant-py).
-It lets you interface with a saltant API conveniently from a terminal.
+saltant-cli is a CLI for
+[saltant](https://github.com/saltant-org/saltant) written on top of
+[saltant-py](https://github.com/saltant-org/saltant-py).  It lets you
+interface with a saltant API conveniently from a terminal.
 
 ## Installation
 
@@ -178,5 +179,5 @@ Options:
 
 ## See also
 
-[saltant-py](https://github.com/mwiens91/saltant-py/), a saltant SDK for
-Python.
+[saltant-py](https://github.com/saltant-org/saltant-py/), a saltant SDK
+for Python.
