@@ -11,6 +11,7 @@ from .resource import (
     generic_create_command,
     generic_get_command,
     generic_list_command,
+    generic_put_command,
 )
 from .utils import(
     list_options,
@@ -75,7 +76,7 @@ def get_container_task_type(ctx, id):
 @list_options
 @click.pass_context
 def list_container_task_types(ctx, filters, filters_file):
-    """List container typesinstances matching filter parameters."""
+    """List container task types matching filter parameters."""
     generic_list_command(
         'container_task_types',
         CONTAINER_TASK_TYPE_LIST_ATTRS,
@@ -137,7 +138,7 @@ def list_container_task_types(ctx, filters, filters_file):
 )
 @click.pass_context
 def create_container_task_type(ctx, **kwargs):
-    """Create a container task instance."""
+    """Create a container task type."""
     # Parse the JSON-encoded arguments
     kwargs['environment_variables'] = json.loads(
         kwargs.pop('json_environment_variables'))
@@ -151,6 +152,81 @@ def create_container_task_type(ctx, **kwargs):
         'container_task_types',
         TASK_INSTANCE_GET_ATTRS,
         ctx,
+        **kwargs
+    )
+
+
+@container_task_types.command(name='put')
+@click.argument(
+    'id',
+    nargs=1,
+    type=click.INT,)
+@click.option(
+    '--name',
+    help="The name of the task.",
+    required=True,
+)
+@click.option(
+    '--command-to-run',
+    help="The command to run to execute the task.",
+    required=True,
+)
+@click.option(
+    '--container-image',
+    help="The container name and tag.",
+    required=True,
+)
+@click.option(
+    '--container-type',
+    help="The type of the container.",
+    required=True,
+    type=click.Choice(['docker', 'singularity']),
+)
+@click.option(
+    '--logs-path',
+    help="The path of the logs directory inside the container.",
+    default="",
+)
+@click.option(
+    '--results-path',
+    help="The path of the results directory inside the container.",
+    default="",
+)
+@click.option(
+    '--json-environment-variables',
+    help="The environment variables required on the host to execute the task, encoded in a JSON string.",
+    default="[]",
+    show_default=True,
+)
+@click.option(
+    '--json-required-arguments',
+    help="The argument names for the task type, encoded in a JSON string.",
+    default="[]",
+    show_default=True,
+)
+@click.option(
+    '--json-required-arguments-default-values',
+    help="Default values for the tasks required arguments, encoded in a JSON string.",
+    default="{}",
+    show_default=True,
+)
+@click.pass_context
+def put_container_task_type(ctx, id, **kwargs):
+    """Update a container task type, overwritting all its attributes."""
+    # Parse the JSON-encoded arguments
+    kwargs['environment_variables'] = json.loads(
+        kwargs.pop('json_environment_variables'))
+    kwargs['required_arguments'] = json.loads(
+        kwargs.pop('json_required_arguments'))
+    kwargs['required_arguments_default_values'] = json.loads(
+        kwargs.pop('json_required_arguments_default_values'))
+
+    # Run the generic create command
+    generic_put_command(
+        'container_task_types',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        id,
         **kwargs
     )
 
@@ -181,7 +257,7 @@ def get_executable_task_type(ctx, id):
 @list_options
 @click.pass_context
 def list_executable_task_types(ctx, filters, filters_file):
-    """List executable typesinstances matching filter parameters."""
+    """List executable types types matching filter parameters."""
     generic_list_command(
         'executable_task_types',
         EXECUTABLE_TASK_TYPE_LIST_ATTRS,
@@ -222,7 +298,7 @@ def list_executable_task_types(ctx, filters, filters_file):
 )
 @click.pass_context
 def create_executable_task_type(ctx, **kwargs):
-    """Create a executable task instance."""
+    """Create an executable task type."""
     # Parse the JSON-encoded arguments
     kwargs['environment_variables'] = json.loads(
         kwargs.pop('json_environment_variables'))
@@ -236,5 +312,59 @@ def create_executable_task_type(ctx, **kwargs):
         'executable_task_types',
         TASK_INSTANCE_GET_ATTRS,
         ctx,
+        **kwargs
+    )
+
+
+@executable_task_types.command(name='put')
+@click.argument(
+    'id',
+    nargs=1,
+    type=click.INT,)
+@click.option(
+    '--name',
+    help="The name of the task.",
+    required=True,
+)
+@click.option(
+    '--command-to-run',
+    help="The command to run to execute the task.",
+    required=True,
+)
+@click.option(
+    '--json-environment-variables',
+    help="The environment variables required on the host to execute the task, encoded in a JSON string.",
+    default="[]",
+    show_default=True,
+)
+@click.option(
+    '--json-required-arguments',
+    help="The argument names for the task type, encoded in a JSON string.",
+    default="[]",
+    show_default=True,
+)
+@click.option(
+    '--json-required-arguments-default-values',
+    help="Default values for the tasks required arguments, encoded in a JSON string.",
+    default="{}",
+    show_default=True,
+)
+@click.pass_context
+def put_executable_task_type(ctx, id, **kwargs):
+    """Update an executable task type, overwritting all its attributes."""
+    # Parse the JSON-encoded arguments
+    kwargs['environment_variables'] = json.loads(
+        kwargs.pop('json_environment_variables'))
+    kwargs['required_arguments'] = json.loads(
+        kwargs.pop('json_required_arguments'))
+    kwargs['required_arguments_default_values'] = json.loads(
+        kwargs.pop('json_required_arguments_default_values'))
+
+    # Run the generic create command
+    generic_put_command(
+        'executable_task_types',
+        TASK_INSTANCE_GET_ATTRS,
+        ctx,
+        id,
         **kwargs
     )

@@ -112,7 +112,8 @@ saltant-cli
 ├── container-task-types
 │   ├── create
 │   ├── get
-│   └── list
+│   ├── list
+│   └── put
 ├── executable-task-instances
 │   ├── clone
 │   ├── create
@@ -123,11 +124,13 @@ saltant-cli
 ├── executable-task-types
 │   ├── create
 │   ├── get
-│   └── list
+│   ├── list
+│   └── put
 ├── task-queues
 │   ├── create
 │   ├── get
-│   └── list
+│   ├── list
+│   └── put
 └── users
     ├── get
     └── list
