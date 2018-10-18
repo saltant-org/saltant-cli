@@ -6,11 +6,7 @@ from __future__ import print_function
 import click
 import click_spinner
 from saltant.exceptions import BadHttpRequestError
-from .utils import (
-    combine_filter_json,
-    generate_table,
-    generate_list_display,
-)
+from .utils import combine_filter_json, generate_table, generate_list_display
 
 
 def generic_get_command(manager_name, attrs, ctx, id):
@@ -28,7 +24,7 @@ def generic_get_command(manager_name, attrs, ctx, id):
             the primary identifier of the object to get.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Query for the object
     try:
@@ -61,7 +57,7 @@ def generic_put_command(manager_name, attrs, ctx, id, **kwargs):
             should match attributes used to update the object.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Create the object
     manager = getattr(client, manager_name)
@@ -88,7 +84,7 @@ def generic_create_command(manager_name, attrs, ctx, **kwargs):
             should match attributes used to create the object.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Create the object
     manager = getattr(client, manager_name)
@@ -100,12 +96,7 @@ def generic_create_command(manager_name, attrs, ctx, **kwargs):
     click.echo(output)
 
 
-def generic_list_command(
-        manager_name,
-        attrs,
-        ctx,
-        filters,
-        filters_file):
+def generic_list_command(manager_name, attrs, ctx, filters, filters_file):
     """Performs a generic list command.
 
     Args:
@@ -121,7 +112,7 @@ def generic_list_command(
             specifying filter information.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Build up JSON filters to use
     combined_filters = combine_filter_json(filters, filters_file)
@@ -151,7 +142,7 @@ def generic_clone_command(manager_name, attrs, ctx, uuid):
             clone.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Clone the task instance
     try:
@@ -182,7 +173,7 @@ def generic_terminate_command(manager_name, attrs, ctx, uuid):
             terminate.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Terminate the task instance
     try:
@@ -198,12 +189,7 @@ def generic_terminate_command(manager_name, attrs, ctx, uuid):
     click.echo(output)
 
 
-def generic_wait_command(
-        manager_name,
-        attrs,
-        ctx,
-        uuid,
-        refresh_period,):
+def generic_wait_command(manager_name, attrs, ctx, uuid, refresh_period):
     """Performs a generic wait command for task instances.
 
     Args:
@@ -220,7 +206,7 @@ def generic_wait_command(
             between checking the task's status.
     """
     # Get the client from the context
-    client = ctx.obj['client']
+    client = ctx.obj["client"]
 
     # Terminate the task instance
     try:

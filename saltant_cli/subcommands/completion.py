@@ -27,23 +27,22 @@ def completion():
 
 @completion.command()
 @click.option(
-    '--append/--overwrite',
+    "--append/--overwrite",
     help="Append the completion code to the file",
-    default=None,)
+    default=None,
+)
 @click.argument(
-    'shell',
+    "shell",
     required=False,
-    type=click_completion.DocumentedChoice(click_completion.core.shells),)
-@click.argument(
-    'path',
-    required=False,)
+    type=click_completion.DocumentedChoice(click_completion.core.shells),
+)
+@click.argument("path", required=False)
 def install(append, shell, path):
     """Install the click-completion-command completion."""
     # Install
     shell, path = click_completion.core.install(
-        shell=shell,
-        path=path,
-        append=append,)
+        shell=shell, path=path, append=append
+    )
 
     # Report back
-    click.echo('%s completion installed in %s' % (shell, path))
+    click.echo("%s completion installed in %s" % (shell, path))

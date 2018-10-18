@@ -2,6 +2,8 @@
 [![codecov](https://codecov.io/gh/saltant-org/saltant-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/saltant-org/saltant-cli)
 [![PyPI](https://img.shields.io/pypi/v/saltant-cli.svg)](https://pypi.org/project/saltant-cli/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/saltant-cli.svg)](https://pypi.org/project/saltant-cli/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+
 
 # saltant CLI
 

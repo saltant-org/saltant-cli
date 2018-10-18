@@ -2,11 +2,7 @@
 
 import os
 import yaml
-from .constants import (
-    CONFIG_FILE_NAME,
-    PROJECT_BASE_DIR,
-    PROJECT_CONFIG_HOME,
-)
+from .constants import CONFIG_FILE_NAME, PROJECT_BASE_DIR, PROJECT_CONFIG_HOME
 from .exceptions import ConfigFileNotFound
 
 
@@ -61,7 +57,7 @@ def parse_config_file(config_path=None):
 
     # Now parse and return it
     try:
-        with open(config_path, 'r') as config_file:
+        with open(config_path, "r") as config_file:
             return yaml.load(config_file)
     except IOError:
         # Be consistent with types of exceptions thrown

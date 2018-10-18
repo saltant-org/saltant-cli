@@ -18,14 +18,16 @@ def list_options(func):
         The enclosed function.
     """
     filters_option = click.option(
-        '--filters',
+        "--filters",
         help="Filter keys and values encoded in JSON.",
-        default=None,)
+        default=None,
+    )
     filters_file_option = click.option(
-        '--filters-file',
+        "--filters-file",
         help="Filter keys and values encoded in a JSON file.",
         default=None,
-        type=click.Path(),)
+        type=click.Path(),
+    )
 
     return filters_option(filters_file_option(func))
 
@@ -68,7 +70,8 @@ def generate_table(objects, attrs):
     """
     return tabulate(
         [[getattr(object, attr) for attr in attrs] for object in objects],
-        headers=attrs,)
+        headers=attrs,
+    )
 
 
 def generate_list_display(object, attrs):
@@ -84,5 +87,6 @@ def generate_list_display(object, attrs):
         the passed in attributes.
     """
     return "\n".join(
-        click.style(attr, bold=True)
-        + ": %s" % getattr(object, attr) for attr in attrs)
+        click.style(attr, bold=True) + ": %s" % getattr(object, attr)
+        for attr in attrs
+    )

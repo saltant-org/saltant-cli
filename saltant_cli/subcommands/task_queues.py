@@ -10,18 +10,9 @@ from .resource import (
     generic_list_command,
     generic_put_command,
 )
-from .utils import(
-    list_options,
-)
+from .utils import list_options
 
-TASK_QUEUE_ATTRS = (
-    'id',
-    'user',
-    'name',
-    'private',
-    'active',
-    'description',
-)
+TASK_QUEUE_ATTRS = ("id", "user", "name", "private", "active", "description")
 
 
 @click.group()
@@ -30,56 +21,38 @@ def task_queues():
     pass
 
 
-@task_queues.command(name='get')
-@click.argument(
-    'id',
-    nargs=1,
-    type=click.INT,)
+@task_queues.command(name="get")
+@click.argument("id", nargs=1, type=click.INT)
 @click.pass_context
 def get_task_queue(ctx, id):
     """Get task queue based on ID."""
-    generic_get_command(
-        'task_queues',
-        TASK_QUEUE_ATTRS,
-        ctx,
-        id,
-    )
+    generic_get_command("task_queues", TASK_QUEUE_ATTRS, ctx, id)
 
 
-@task_queues.command(name='list')
+@task_queues.command(name="list")
 @list_options
 @click.pass_context
 def list_task_queues(ctx, filters, filters_file):
     """List task queues matching filter parameters."""
     generic_list_command(
-        'task_queues',
-        TASK_QUEUE_ATTRS,
-        ctx,
-        filters,
-        filters_file,
+        "task_queues", TASK_QUEUE_ATTRS, ctx, filters, filters_file
     )
 
 
-@task_queues.command(name='create')
+@task_queues.command(name="create")
+@click.option("--name", help="The name of the task queue.", required=True)
 @click.option(
-    '--name',
-    help="The name of the task queue.",
-    required=True,
+    "--description", help="A description of the task queue.", default=""
 )
 @click.option(
-    '--description',
-    help="A description of the task queue.",
-    default="",
-)
-@click.option(
-    '--private',
+    "--private",
     help="Whether the task queue is exclusive to the creator.",
     default=False,
     show_default=True,
     type=click.BOOL,
 )
 @click.option(
-    '--active',
+    "--active",
     help="Whether the task queue is active.",
     default=True,
     show_default=True,
@@ -88,38 +61,24 @@ def list_task_queues(ctx, filters, filters_file):
 @click.pass_context
 def create_task_queue(ctx, **kwargs):
     """Create a task queue."""
-    generic_create_command(
-        'task_queues',
-        TASK_QUEUE_ATTRS,
-        ctx,
-        **kwargs
-    )
+    generic_create_command("task_queues", TASK_QUEUE_ATTRS, ctx, **kwargs)
 
 
-@task_queues.command(name='put')
-@click.argument(
-    'id',
-    nargs=1,
-    type=click.INT,)
+@task_queues.command(name="put")
+@click.argument("id", nargs=1, type=click.INT)
+@click.option("--name", help="The name of the task queue.", required=True)
 @click.option(
-    '--name',
-    help="The name of the task queue.",
-    required=True,
+    "--description", help="A description of the task queue.", default=""
 )
 @click.option(
-    '--description',
-    help="A description of the task queue.",
-    default="",
-)
-@click.option(
-    '--private',
+    "--private",
     help="Whether the task queue is exclusive to the creator.",
     default=False,
     show_default=True,
     type=click.BOOL,
 )
 @click.option(
-    '--active',
+    "--active",
     help="Whether the task queue is active.",
     default=True,
     show_default=True,
@@ -128,10 +87,4 @@ def create_task_queue(ctx, **kwargs):
 @click.pass_context
 def put_task_queue(ctx, id, **kwargs):
     """Update a task queue, overwritting all its attributes."""
-    generic_put_command(
-        'task_queues',
-        TASK_QUEUE_ATTRS,
-        ctx,
-        id,
-        **kwargs
-    )
+    generic_put_command("task_queues", TASK_QUEUE_ATTRS, ctx, id, **kwargs)
