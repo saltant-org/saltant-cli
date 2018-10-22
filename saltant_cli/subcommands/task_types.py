@@ -32,7 +32,9 @@ CONTAINER_TASK_TYPE_GET_ATTRS = BASE_TASK_TYPE_GET_ATTRS + (
     "container_image",
     "container_type",
 )
-EXECUTABLE_TASK_TYPE_GET_ATTRS = BASE_TASK_TYPE_GET_ATTRS
+EXECUTABLE_TASK_TYPE_GET_ATTRS = BASE_TASK_TYPE_GET_ATTRS + (
+    "json_file_option",
+)
 
 BASE_TASK_TYPE_LIST_ATTRS = ("id", "name", "user", "description")
 CONTAINER_TASK_TYPE_LIST_ATTRS = BASE_TASK_TYPE_LIST_ATTRS + (
@@ -256,6 +258,11 @@ def list_executable_task_types(ctx, filters, filters_file):
     default="{}",
     show_default=True,
 )
+@click.option(
+    "--json-file-option",
+    help="The option which accepts a JSON-encoded file for the command to run.",
+    default=None,
+)
 @click.pass_context
 def create_executable_task_type(ctx, **kwargs):
     """Create an executable task type."""
@@ -301,6 +308,11 @@ def create_executable_task_type(ctx, **kwargs):
     help="Default values for the tasks required arguments, encoded in a JSON string.",
     default="{}",
     show_default=True,
+)
+@click.option(
+    "--json-file-option",
+    help="The option which accepts a JSON-encoded file for the command to run.",
+    default=None,
 )
 @click.pass_context
 def put_executable_task_type(ctx, id, **kwargs):

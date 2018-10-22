@@ -38,7 +38,7 @@ setup(
         "click-spinner>=0.1.8",
         "colorama>=0.3.9",
         "PyYAML>=3.13",
-        "saltant-py>=0.1.0",
+        "saltant-py>=0.2.0",
         "tabulate>=0.8.2",
     ],
 )
