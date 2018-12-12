@@ -12,7 +12,25 @@ from .resource import (
 )
 from .utils import list_options
 
-TASK_QUEUE_ATTRS = ("id", "user", "name", "private", "active", "description")
+TASK_QUEUE_LIST_ATTRS = (
+    "id",
+    "user",
+    "name",
+    "private",
+    "active",
+    "description",
+)
+TASK_QUEUE_GET_ATTRS = (
+    "id",
+    "user",
+    "name",
+    "description",
+    "private",
+    "runs_executable_tasks",
+    "runs_docker_container_tasks",
+    "runs_singularity_container_tasks",
+    "active",
+)
 
 
 @click.group()
@@ -26,7 +44,7 @@ def task_queues():
 @click.pass_context
 def get_task_queue(ctx, id):
     """Get task queue based on ID."""
-    generic_get_command("task_queues", TASK_QUEUE_ATTRS, ctx, id)
+    generic_get_command("task_queues", TASK_QUEUE_GET_ATTRS, ctx, id)
 
 
 @task_queues.command(name="list")
@@ -35,7 +53,7 @@ def get_task_queue(ctx, id):
 def list_task_queues(ctx, filters, filters_file):
     """List task queues matching filter parameters."""
     generic_list_command(
-        "task_queues", TASK_QUEUE_ATTRS, ctx, filters, filters_file
+        "task_queues", TASK_QUEUE_LIST_ATTRS, ctx, filters, filters_file
     )
 
 
@@ -52,6 +70,27 @@ def list_task_queues(ctx, filters, filters_file):
     type=click.BOOL,
 )
 @click.option(
+    "--runs-executable-tasks",
+    help="Whether the task queue runs executable tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
+    "--runs-docker-container-tasks",
+    help="Whether the task queue runs Docker container tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
+    "--runs-singularity-container-tasks",
+    help="Whether the task queue runs Singularity container tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
     "--active",
     help="Whether the task queue is active.",
     default=True,
@@ -61,7 +100,7 @@ def list_task_queues(ctx, filters, filters_file):
 @click.pass_context
 def create_task_queue(ctx, **kwargs):
     """Create a task queue."""
-    generic_create_command("task_queues", TASK_QUEUE_ATTRS, ctx, **kwargs)
+    generic_create_command("task_queues", TASK_QUEUE_GET_ATTRS, ctx, **kwargs)
 
 
 @task_queues.command(name="put")
@@ -78,6 +117,27 @@ def create_task_queue(ctx, **kwargs):
     type=click.BOOL,
 )
 @click.option(
+    "--runs-executable-tasks",
+    help="Whether the task queue runs executable tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
+    "--runs-docker-container-tasks",
+    help="Whether the task queue runs Docker container tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
+    "--runs-singularity-container-tasks",
+    help="Whether the task queue runs Singularity container tasks.",
+    default=True,
+    show_default=True,
+    type=click.BOOL,
+)
+@click.option(
     "--active",
     help="Whether the task queue is active.",
     default=True,
@@ -87,4 +147,4 @@ def create_task_queue(ctx, **kwargs):
 @click.pass_context
 def put_task_queue(ctx, id, **kwargs):
     """Update a task queue, overwritting all its attributes."""
-    generic_put_command("task_queues", TASK_QUEUE_ATTRS, ctx, id, **kwargs)
+    generic_put_command("task_queues", TASK_QUEUE_GET_ATTRS, ctx, id, **kwargs)
