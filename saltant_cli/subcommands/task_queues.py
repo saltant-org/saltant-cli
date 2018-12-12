@@ -105,43 +105,38 @@ def create_task_queue(ctx, **kwargs):
 
 @task_queues.command(name="put")
 @click.argument("id", nargs=1, type=click.INT)
-@click.option("--name", help="The name of the task queue.", required=True)
+@click.option("--name", required=True, help="The name of the task queue.")
 @click.option(
-    "--description", help="A description of the task queue.", default=""
+    "--description", required=True, help="A description of the task queue."
 )
 @click.option(
     "--private",
     help="Whether the task queue is exclusive to the creator.",
-    default=False,
-    show_default=True,
+    required=True,
     type=click.BOOL,
 )
 @click.option(
     "--runs-executable-tasks",
     help="Whether the task queue runs executable tasks.",
-    default=True,
-    show_default=True,
+    required=True,
     type=click.BOOL,
 )
 @click.option(
     "--runs-docker-container-tasks",
     help="Whether the task queue runs Docker container tasks.",
-    default=True,
-    show_default=True,
+    required=True,
     type=click.BOOL,
 )
 @click.option(
     "--runs-singularity-container-tasks",
     help="Whether the task queue runs Singularity container tasks.",
-    default=True,
-    show_default=True,
+    required=True,
     type=click.BOOL,
 )
 @click.option(
     "--active",
     help="Whether the task queue is active.",
-    default=True,
-    show_default=True,
+    required=True,
     type=click.BOOL,
 )
 @click.pass_context

@@ -140,48 +140,45 @@ def create_container_task_type(ctx, **kwargs):
 
 @container_task_types.command(name="put")
 @click.argument("id", nargs=1, type=click.INT)
-@click.option("--name", help="The name of the task.", required=True)
+@click.option("--name", required=True, help="The name of the task.")
 @click.option(
     "--command-to-run",
-    help="The command to run to execute the task.",
     required=True,
+    help="The command to run to execute the task.",
 )
 @click.option(
-    "--container-image", help="The container name and tag.", required=True
+    "--container-image", required=True, help="The container name and tag."
 )
 @click.option(
     "--container-type",
-    help="The type of the container.",
     required=True,
     type=click.Choice(["docker", "singularity"]),
+    help="The type of the container.",
 )
 @click.option(
     "--logs-path",
+    required=True,
     help="The path of the logs directory inside the container.",
-    default="",
 )
 @click.option(
     "--results-path",
+    required=True,
     help="The path of the results directory inside the container.",
-    default="",
 )
 @click.option(
     "--json-environment-variables",
+    required=True,
     help="The environment variables required on the host to execute the task, encoded in a JSON string.",
-    default="[]",
-    show_default=True,
 )
 @click.option(
     "--json-required-arguments",
+    required=True,
     help="The argument names for the task type, encoded in a JSON string.",
-    default="[]",
-    show_default=True,
 )
 @click.option(
     "--json-required-arguments-default-values",
+    required=True,
     help="Default values for the tasks required arguments, encoded in a JSON string.",
-    default="{}",
-    show_default=True,
 )
 @click.pass_context
 def put_container_task_type(ctx, id, **kwargs):
@@ -285,34 +282,31 @@ def create_executable_task_type(ctx, **kwargs):
 
 @executable_task_types.command(name="put")
 @click.argument("id", nargs=1, type=click.INT)
-@click.option("--name", help="The name of the task.", required=True)
+@click.option("--name", required=True, help="The name of the task.")
 @click.option(
     "--command-to-run",
-    help="The command to run to execute the task.",
     required=True,
+    help="The command to run to execute the task.",
 )
 @click.option(
     "--json-environment-variables",
+    required=True,
     help="The environment variables required on the host to execute the task, encoded in a JSON string.",
-    default="[]",
-    show_default=True,
 )
 @click.option(
     "--json-required-arguments",
+    required=True,
     help="The argument names for the task type, encoded in a JSON string.",
-    default="[]",
-    show_default=True,
 )
 @click.option(
     "--json-required-arguments-default-values",
+    required=True,
     help="Default values for the tasks required arguments, encoded in a JSON string.",
-    default="{}",
-    show_default=True,
 )
 @click.option(
     "--json-file-option",
+    required=True,
     help="The option which accepts a JSON-encoded file for the command to run.",
-    default=None,
 )
 @click.pass_context
 def put_executable_task_type(ctx, id, **kwargs):
