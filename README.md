@@ -132,6 +132,11 @@ saltant-cli
 │   ├── get
 │   ├── list
 │   └── put
+├── task-whitelists
+│   ├── create
+│   ├── get
+│   ├── list
+│   └── put
 └── users
     ├── get
     └── list
