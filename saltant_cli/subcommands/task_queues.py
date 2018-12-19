@@ -12,14 +12,6 @@ from .resource import (
 )
 from .utils import list_options
 
-TASK_QUEUE_LIST_ATTRS = (
-    "id",
-    "user",
-    "name",
-    "private",
-    "active",
-    "description",
-)
 TASK_QUEUE_GET_ATTRS = (
     "id",
     "user",
@@ -30,6 +22,14 @@ TASK_QUEUE_GET_ATTRS = (
     "runs_docker_container_tasks",
     "runs_singularity_container_tasks",
     "active",
+)
+TASK_QUEUE_LIST_ATTRS = (
+    "id",
+    "user",
+    "name",
+    "private",
+    "active",
+    "description",
 )
 
 
