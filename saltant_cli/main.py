@@ -19,6 +19,7 @@ from .subcommands.task_instances import (
 )
 from .subcommands.task_queues import task_queues
 from .subcommands.task_types import container_task_types, executable_task_types
+from .subcommands.task_whitelists import task_whitelists
 from .subcommands.users import users
 from .version import NAME, VERSION
 
@@ -131,6 +132,7 @@ main.add_command(container_task_types)
 main.add_command(executable_task_instances)
 main.add_command(executable_task_types)
 main.add_command(task_queues)
+main.add_command(task_whitelists)
 main.add_command(users)
 
 # Enable click_completion monkey patch
