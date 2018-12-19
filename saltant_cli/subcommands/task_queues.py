@@ -10,7 +10,7 @@ from .resource import (
     generic_list_command,
     generic_put_command,
 )
-from .utils import list_options
+from .utils import list_options, PythonLiteralOption
 
 TASK_QUEUE_GET_ATTRS = (
     "id",
@@ -22,6 +22,7 @@ TASK_QUEUE_GET_ATTRS = (
     "runs_docker_container_tasks",
     "runs_singularity_container_tasks",
     "active",
+    "whitelists",
 )
 TASK_QUEUE_LIST_ATTRS = (
     "id",
@@ -97,6 +98,13 @@ def list_task_queues(ctx, filters, filters_file):
     show_default=True,
     type=click.BOOL,
 )
+@click.option(
+    "--whitelists",
+    help="IDs of the task whitelists.",
+    cls=PythonLiteralOption,
+    default=[],
+    show_default=True,
+)
 @click.pass_context
 def create_task_queue(ctx, **kwargs):
     """Create a task queue."""
@@ -138,6 +146,13 @@ def create_task_queue(ctx, **kwargs):
     help="Whether the task queue is active.",
     required=True,
     type=click.BOOL,
+)
+@click.option(
+    "--whitelists",
+    help="IDs of the task whitelists.",
+    cls=PythonLiteralOption,
+    default=[],
+    show_default=True,
 )
 @click.pass_context
 def put_task_queue(ctx, id, **kwargs):
