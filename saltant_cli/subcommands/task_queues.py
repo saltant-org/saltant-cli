@@ -150,8 +150,8 @@ def create_task_queue(ctx, **kwargs):
 @click.option(
     "--whitelists",
     help="IDs of the task whitelists.",
+    required=True,
     cls=PythonLiteralOption,
-    default=[],
     show_default=True,
 )
 @click.pass_context
