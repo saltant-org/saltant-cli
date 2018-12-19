@@ -6,6 +6,7 @@ Currently this supports container and executable task types.
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import json
 import click
 from .resource import (
     generic_create_command,
@@ -134,7 +135,7 @@ def create_container_task_type(ctx, **kwargs):
 
     # Run the generic create command
     generic_create_command(
-        "container_task_types", TASK_INSTANCE_GET_ATTRS, ctx, **kwargs
+        "container_task_types", CONTAINER_TASK_TYPE_GET_ATTRS, ctx, **kwargs
     )
 
 
@@ -196,7 +197,11 @@ def put_container_task_type(ctx, id, **kwargs):
 
     # Run the generic create command
     generic_put_command(
-        "container_task_types", TASK_INSTANCE_GET_ATTRS, ctx, id, **kwargs
+        "container_task_types",
+        CONTAINER_TASK_TYPE_GET_ATTRS,
+        ctx,
+        id,
+        **kwargs
     )
 
 
@@ -276,7 +281,7 @@ def create_executable_task_type(ctx, **kwargs):
 
     # Run the generic create command
     generic_create_command(
-        "executable_task_types", TASK_INSTANCE_GET_ATTRS, ctx, **kwargs
+        "executable_task_types", EXECUTABLE_TASK_TYPE_GET_ATTRS, ctx, **kwargs
     )
 
 
@@ -324,5 +329,9 @@ def put_executable_task_type(ctx, id, **kwargs):
 
     # Run the generic create command
     generic_put_command(
-        "executable_task_types", TASK_INSTANCE_GET_ATTRS, ctx, id, **kwargs
+        "executable_task_types",
+        EXECUTABLE_TASK_TYPE_GET_ATTRS,
+        ctx,
+        id,
+        **kwargs
     )
