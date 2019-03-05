@@ -58,7 +58,7 @@ def parse_config_file(config_path=None):
     # Now parse and return it
     try:
         with open(config_path, "r") as config_file:
-            return yaml.load(config_file)
+            return yaml.safe_load(config_file)
     except IOError:
         # Be consistent with types of exceptions thrown
         raise ConfigFileNotFound
